@@ -1,0 +1,18 @@
+from transformers import pipeline
+
+# Inizializziamo il riassuntore
+summarizer = pipeline("summarization", model="t5-small")
+
+testo_lungo = """
+Artificial Intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence 
+displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, 
+which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.
+As machines become increasingly capable, tasks considered to require 'intelligence' are often removed from the definition of AI, 
+a phenomenon known as the AI effect.
+"""
+
+# Generiamo il riassunto
+riassunto = summarizer(testo_lungo, max_length=40, min_length=10, do_sample=False)
+
+print("--- Riassunto AI ---")
+print(riassunto[0]['summary_text'])
